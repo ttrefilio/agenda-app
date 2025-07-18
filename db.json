@@ -1,0 +1,36 @@
+{
+  "tarefas": [
+    {
+      "id": "c330eade-79d6-4d76-a34c-46dedb5bee41",
+      "nome": "Reuniao de Planejamento",
+      "data": "2025-07-18",
+      "hora": "08:35",
+      "prioridade": "Média",
+      "finalizado": false
+    },
+    {
+      "id": "c2480e65-a056-4f3e-8900-5cdad597b816",
+      "nome": "Aula C# Avancado",
+      "data": "2025-07-18",
+      "hora": "08:36",
+      "prioridade": "Alta",
+      "finalizado": null
+    },
+    {
+      "id": "7fbc6dcc-aa8e-49f3-8e5d-8f7317924d90",
+      "nome": "Aula Angular",
+      "data": "2025-07-18",
+      "hora": "08:36",
+      "prioridade": "Alta",
+      "finalizado": false
+    },
+    {
+      "id": "7c890d51-5f6b-43bf-915e-1942cfe2db36",
+      "nome": "Banco de Dados SQL",
+      "data": "2025-07-18",
+      "hora": "08:37",
+      "prioridade": "Baixa",
+      "finalizado": null
+    }
+  ]
+}

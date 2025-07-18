@@ -1,1 +1,63 @@
-<p>dashboard-tarefas works!</p>
+<h4>Dashboard de tarefas</h4>
+<p>Indicadores da agenda de tarefas.</p>
+
+
+<div class="row mt-3">
+    <div class="col-md-6">
+        <div class="card shadow">
+            <div class="card-body">
+
+
+                <div [chart]="graficoTarefasPorPrioridade()"></div>
+
+
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th>Prioridade</th>
+                            <th>Quantidade</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of dadosPrioridade().label; let i = index">
+                            <td>{{ item | uppercase}}</td>
+                            <td>{{ dadosPrioridade().data[i] }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card shadow">
+            <div class="card-body">
+
+
+                <div [chart]="graficoTarefasPorStatus()"></div>
+
+
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th>Status</th>
+                            <th>Quantidade</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of dadosStatus().label; let i = index">
+                            <td>{{ item | uppercase}}</td>
+                            <td>{{ dadosStatus().data[i] }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

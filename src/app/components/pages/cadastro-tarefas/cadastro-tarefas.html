@@ -1,1 +1,71 @@
-<p>cadastro-tarefas works!</p>
+<h4>Cadastro de tarefas</h4>
+<p>Preencha os campos para incluir uma tarefa em sua agenda.</p>
+<hr/>
+
+
+<div *ngIf="mensagem()" class="alert alert-primary alert-dismissible fade show" role="alert">
+  <strong>{{ mensagem() }}</strong>
+  <button (click)="mensagem.set('')" type="button" class="btn-close" aria-label="Close"></button>
+</div>
+
+
+<form [formGroup]="formCadastro" (ngSubmit)="onSubmit()">
+
+
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <label>Nome da tarefa:</label>
+            <input type="text" class="form-control" formControlName="nome"
+                placeholder="Digite o nome da tarefa"/>
+            <div class="text-danger" *ngIf="formCadastro.get('nome')?.touched && formCadastro.get('nome')?.invalid">
+                O nome da tarefa é obrigatório e deve ter pelo menos 6 caracteres.
+            </div>
+        </div>
+        <div class="col-md-3">
+            <label>Data:</label>
+            <input type="date" class="form-control" formControlName="data"/>
+            <div class="text-danger" *ngIf="formCadastro.get('data')?.touched && formCadastro.get('data')?.invalid">
+                A data da tarefa é obrigatória.
+            </div>
+        </div>
+        <div class="col-md-3">
+            <label>Hora:</label>
+            <input type="time" class="form-control" formControlName="hora"/>
+            <div class="text-danger" *ngIf="formCadastro.get('hora')?.touched && formCadastro.get('hora')?.invalid">
+                A hora da tarefa é obrigatória.
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row mb-3">
+        <div class="col-md-3">
+            <label>Prioridade da tarefa:</label>
+            <select class="form-select" formControlName="prioridade">
+                <option value="">Escolha uma opção</option>
+                <option *ngFor="let item of prioridades" value="{{ item }}">
+                    {{ item | uppercase }}
+                </option>
+            </select>
+            <div class="text-danger" *ngIf="formCadastro.get('prioridade')?.touched && formCadastro.get('prioridade')?.invalid">
+                A prioridade é obrigatória.
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="mt-4">
+                <input type="checkbox" class="form-check-input" formControlName="finalizado"/>
+                <label class="form-check-label ms-2">Tarefa finalizada?</label>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <input type="submit" class="btn btn-success" value="Realizar Cadastro"
+                [disabled]="formCadastro.invalid"/>
+        </div>
+    </div>
+
+
+</form>

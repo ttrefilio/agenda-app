@@ -1,1 +1,78 @@
-<p>consulta-tarefas works!</p>
+<h4>Consulta de Tarefas</h4>
+<p>Listagem de tarefas cadastradas na agenda.</p>
+<hr />
+
+<div
+  *ngIf="!finalizado()"
+  class="alert alert-secondary d-flex align-items-center gap-3"
+>
+  <div
+    class="spinner-border text-secondary"
+    role="status"
+    aria-hidden="true"
+  ></div>
+  <div>
+    <strong>Processando...</strong>
+    <hr class="my-2" />
+    Carregando as tarefas da agenda, por favor aguarde.
+  </div>
+</div>
+
+<div
+  *ngIf="finalizado() && tarefas().length == 0"
+  class="alert alert-warning d-flex align-items-center gap-3"
+>
+  Nenhuma Tarefa foi encontrada em sua agenda.
+</div>
+
+<div *ngIf="mensagem()" class="alert alert-primary alert-dismissible fade show" role="alert">
+  <strong>{{ mensagem() }}</strong>
+  <button (click)="mensagem.set('')" type="button" class="btn-close" aria-label="Close"></button>
+</div>
+
+<table
+  *ngIf="tarefas().length > 0"
+  class="table table-sm table-hover table-striped"
+>
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Data</th>
+      <th>Hora</th>
+      <th>Prioridade</th>
+      <th>Finalizado</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let tarefa of tarefas()">
+      <td>{{ tarefa.nome | uppercase }}</td>
+      <td>{{ tarefa.data | date : "dd/MM/yyyy" }}</td>
+      <td>{{ tarefa.hora }}</td>
+      <td>
+        <div [ngSwitch]="tarefa.prioridade">
+          <span *ngSwitchCase="'Baixa'" class="badge bg-success">Baixa</span>
+          <span *ngSwitchCase="'Média'" class="badge bg-warning">Média</span>
+          <span *ngSwitchCase="'Alta'" class="badge bg-danger">Alta</span>
+        </div>
+      </td>
+      <td>
+        {{ tarefa.finalizado ? "Sim" : "Não" }}
+      </td>
+      <td>
+        <button class="btn btn-outline-danger btn-sm me-2" (click)="onDelete(tarefa.id)">
+          Excluir
+        </button>
+        <button class="btn btn-outline-primary btn-sm"
+        [routerLink]="['/editar-tarefas', tarefa.id]">
+          Editar
+        </button>
+      </td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="6">Quantidade de tarefas: {{ tarefas().length }}</td>
+    </tr>
+  </tfoot>
+</table>
